@@ -25,10 +25,10 @@ class CommandExecutor:
 
         try:
             for stdout_line in iter(process.stdout.readline, ""):
-                self.callback(stdout_line, source="stdout")
+                self.callback(stdout_line.strip())
 
             for stderr_line in iter(process.stderr.readline, ""):
-                self.callback(stderr_line, source="stderr")
+                self.callback(stderr_line.strip())
 
             process.wait()
 
