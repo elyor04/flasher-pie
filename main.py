@@ -33,7 +33,7 @@ class CommandExecutor:
             process.wait()
 
             if process.returncode != 0:
-                print(f"OpenOCD exited with error code: {process.returncode}")
+                print(f"Process exited with error code: {process.returncode}")
 
         except Exception as e:
             print(f"Error while processing: {e}")
