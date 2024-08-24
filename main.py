@@ -20,19 +20,32 @@ class CommandExecutor:
 
     def run(self):
         process = subprocess.Popen(
-            self.command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
+            self.command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True
         )
 
-        for line in process.stdout:
-            self.callback(line.strip())
+        try:
+            for line in process.stdout:
+                self.callback(line.strip())
+        except Exception as e:
+            print(f"Error while processing output: {e}")
+        finally:
+            process.stdout.close()
+            process.wait()
 
-        process.stdout.close()
-        process.wait()
+        # process = subprocess.Popen(
+        #     self.command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
+        # )
 
-        if process.returncode != 0:
-            error = process.stderr.read()
-            print(f"Error: {error.strip()}")
-        process.stderr.close()
+        # for line in process.stdout:
+        #     self.callback(line.strip())
+
+        # process.stdout.close()
+        # process.wait()
+
+        # if process.returncode != 0:
+        #     error = process.stderr.read()
+        #     print(f"Error: {error.strip()}")
+        # process.stderr.close()
 
 
 class OpenOcd:
