@@ -15,20 +15,17 @@ class CommandExecutor:
         self.command = shlex.split(command_str)
         self.callback = callback if callback else self._default_cb
 
-    def _default_cb(self, line, type):
-        print(f"{type.capitalize()}: {line}")
+    def _default_cb(self, line):
+        print(f"Output: {line}")
 
     def run(self):
         process = subprocess.Popen(
-            self.command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
+            self.command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True
         )
 
         try:
-            for stdout_line in process.stdout:
-                self.callback(stdout_line.strip(), "output")
-
-            for stderr_line in process.stderr:
-                self.callback(stderr_line.strip(), "error")
+            for line in process.stdout:
+                self.callback(line)
 
             process.wait()
 
@@ -40,7 +37,6 @@ class CommandExecutor:
 
         finally:
             process.stdout.close()
-            process.stderr.close()
 
 
 class OpenOcd:
