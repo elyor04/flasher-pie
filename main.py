@@ -122,4 +122,5 @@ class OpenOcd:
 if __name__ == "__main__":
     OpenOcd.load_data("./test-data")
     source_dirs = OpenOcd.source_dirs()
-    print(source_dirs)
+    print(OpenOcd.get_config(source_dirs[0]))
+    OpenOcd.flash(source_dirs[0])
