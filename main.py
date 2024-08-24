@@ -25,7 +25,7 @@ class CommandExecutor:
 
         try:
             for line in process.stdout:
-                self.callback(line)
+                self.callback(line.strip())
 
             process.wait()
 
