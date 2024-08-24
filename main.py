@@ -68,7 +68,7 @@ class OpenOcd:
         ]
 
     def get_config(self, source_dir: str) -> Dict[str, str]:
-        config = {}
+        config = dict()
         sources = [
             pathlib.Path(os.path.join(source_dir, src))
             for src in os.listdir(source_dir)
