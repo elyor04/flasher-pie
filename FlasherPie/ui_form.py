@@ -16,8 +16,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFormLayout, QLabel, QListWidget,
-    QListWidgetItem, QPushButton, QSizePolicy, QSpacerItem,
-    QVBoxLayout, QWidget)
+    QListWidgetItem, QPushButton, QSizePolicy, QVBoxLayout,
+    QWidget)
 
 from .button import OrientedButton
 
@@ -54,44 +54,32 @@ class Ui_Widget(object):
         self.label_2 = QLabel(self.widget)
         self.label_2.setObjectName(u"label_2")
 
-        self.formLayout.setWidget(2, QFormLayout.LabelRole, self.label_2)
+        self.formLayout.setWidget(1, QFormLayout.LabelRole, self.label_2)
 
         self.versionLabel = QLabel(self.widget)
         self.versionLabel.setObjectName(u"versionLabel")
 
-        self.formLayout.setWidget(2, QFormLayout.FieldRole, self.versionLabel)
+        self.formLayout.setWidget(1, QFormLayout.FieldRole, self.versionLabel)
 
         self.label_3 = QLabel(self.widget)
         self.label_3.setObjectName(u"label_3")
 
-        self.formLayout.setWidget(4, QFormLayout.LabelRole, self.label_3)
+        self.formLayout.setWidget(2, QFormLayout.LabelRole, self.label_3)
 
         self.dateLabel = QLabel(self.widget)
         self.dateLabel.setObjectName(u"dateLabel")
 
-        self.formLayout.setWidget(4, QFormLayout.FieldRole, self.dateLabel)
+        self.formLayout.setWidget(2, QFormLayout.FieldRole, self.dateLabel)
 
         self.label_4 = QLabel(self.widget)
         self.label_4.setObjectName(u"label_4")
 
-        self.formLayout.setWidget(6, QFormLayout.LabelRole, self.label_4)
+        self.formLayout.setWidget(3, QFormLayout.LabelRole, self.label_4)
 
         self.descriptionLabel = QLabel(self.widget)
         self.descriptionLabel.setObjectName(u"descriptionLabel")
 
-        self.formLayout.setWidget(6, QFormLayout.FieldRole, self.descriptionLabel)
-
-        self.verticalSpacer = QSpacerItem(20, 17, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.formLayout.setItem(1, QFormLayout.LabelRole, self.verticalSpacer)
-
-        self.verticalSpacer_2 = QSpacerItem(20, 13, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.formLayout.setItem(3, QFormLayout.LabelRole, self.verticalSpacer_2)
-
-        self.verticalSpacer_3 = QSpacerItem(20, 13, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.formLayout.setItem(5, QFormLayout.LabelRole, self.verticalSpacer_3)
+        self.formLayout.setWidget(3, QFormLayout.FieldRole, self.descriptionLabel)
 
 
         self.verticalLayout_3.addLayout(self.formLayout)
