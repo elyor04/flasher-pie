@@ -25,6 +25,8 @@ class CommandExecutor:
                 process.wait()
 
                 if process.returncode != 0:
-                    print(f"Process exited with error code: {process.returncode}")
+                    self.callback(
+                        f"Process exited with error code: {process.returncode}"
+                    )
         except Exception as e:
             print(f"Error while processing: {e}")

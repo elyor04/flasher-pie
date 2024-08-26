@@ -75,11 +75,14 @@ class OrientedButton(QPushButton):
 
     def paintEvent(self, event: QPaintEvent) -> None:
         painter = QStylePainter(self)
+        transform = QTransform()
         option = QStyleOptionButton()
         self.initStyleOption(option)
 
-        transform = QTransform()
-        if self._orientation == OrientedButton.VerticalTopToBottom:
+        if self._orientation == OrientedButton.Horizontal:
+            painter.drawControl(QStyle.CE_PushButton, option)
+            return
+        elif self._orientation == OrientedButton.VerticalTopToBottom:
             transform.rotate(90)
             transform.translate(0, -self.width())
         elif self._orientation == OrientedButton.VerticalBottomToTop:

@@ -3,6 +3,7 @@ from PySide6.QtGui import QIcon
 from .ui_form import Ui_Widget
 from .button import OrientedButton
 from .openOcd import OpenOcd
+from .memoryCard import get_memory_card_paths
 
 
 class FlasherPie(QWidget):
@@ -14,6 +15,7 @@ class FlasherPie(QWidget):
 
         self.ui.setupUi(self)
         self._init_ui()
+        self._load_data()
 
     def _init_ui(self) -> None:
         self.ui.menuButton.setOrientation(OrientedButton.VerticalTopToBottom)
@@ -45,6 +47,10 @@ class FlasherPie(QWidget):
         self.ui.upButton.clicked.connect(self.upButton_onclick)
         self.ui.downButton.clicked.connect(self.downButton_onclick)
         self.ui.enterButton.clicked.connect(self.enterButton_onclick)
+
+    def _load_data(self) -> None:
+        for memory_card_path in get_memory_card_paths():
+            self.openocd.load_data(memory_card_path)
 
     def menuButton_onclick(self) -> None:
         pass

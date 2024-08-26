@@ -29,8 +29,11 @@ class OpenOcd:
                 and source.suffix == ".zip"
                 and source.stem not in data_sources
             ):
-                with zipfile.ZipFile(source, "r") as _file:
-                    _file.extractall(os.path.join(self.data_dir, source.stem))
+                try:
+                    with zipfile.ZipFile(source, "r") as _file:
+                        _file.extractall(os.path.join(self.data_dir, source.stem))
+                except Exception as e:
+                    print(f"Error while extracting {source}: {e}")
 
     def source_dirs(self) -> list[str]:
         return [
