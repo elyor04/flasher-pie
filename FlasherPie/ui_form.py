@@ -35,7 +35,7 @@ class Ui_Widget(object):
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.flashListWidget = QListWidget(self.widget)
         self.flashListWidget.setObjectName(u"flashListWidget")
-        self.flashListWidget.setStyleSheet(u"background-color: rgb(200, 200, 200);")
+        self.flashListWidget.setStyleSheet(u"background-color: rgb(200, 200, 200); color: black;")
 
         self.verticalLayout_3.addWidget(self.flashListWidget)
 
@@ -86,7 +86,7 @@ class Ui_Widget(object):
 
         self.logListWidget = QListWidget(self.widget)
         self.logListWidget.setObjectName(u"logListWidget")
-        self.logListWidget.setStyleSheet(u"background-color: rgb(50, 50, 50);")
+        self.logListWidget.setStyleSheet(u"background-color: rgb(50, 50, 50); color: white;")
 
         self.verticalLayout_3.addWidget(self.logListWidget)
 
