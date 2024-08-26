@@ -43,41 +43,49 @@ class Ui_Widget(object):
         self.formLayout.setObjectName(u"formLayout")
         self.label = QLabel(self.widget)
         self.label.setObjectName(u"label")
+        self.label.setStyleSheet(u"color: black;")
 
         self.formLayout.setWidget(0, QFormLayout.LabelRole, self.label)
 
         self.titleLabel = QLabel(self.widget)
         self.titleLabel.setObjectName(u"titleLabel")
+        self.titleLabel.setStyleSheet(u"color: black;")
 
         self.formLayout.setWidget(0, QFormLayout.FieldRole, self.titleLabel)
 
         self.label_2 = QLabel(self.widget)
         self.label_2.setObjectName(u"label_2")
+        self.label_2.setStyleSheet(u"color: black;")
 
         self.formLayout.setWidget(1, QFormLayout.LabelRole, self.label_2)
 
         self.versionLabel = QLabel(self.widget)
         self.versionLabel.setObjectName(u"versionLabel")
+        self.versionLabel.setStyleSheet(u"color: black;")
 
         self.formLayout.setWidget(1, QFormLayout.FieldRole, self.versionLabel)
 
         self.label_3 = QLabel(self.widget)
         self.label_3.setObjectName(u"label_3")
+        self.label_3.setStyleSheet(u"color: black;")
 
         self.formLayout.setWidget(2, QFormLayout.LabelRole, self.label_3)
 
         self.dateLabel = QLabel(self.widget)
         self.dateLabel.setObjectName(u"dateLabel")
+        self.dateLabel.setStyleSheet(u"color: black;")
 
         self.formLayout.setWidget(2, QFormLayout.FieldRole, self.dateLabel)
 
         self.label_4 = QLabel(self.widget)
         self.label_4.setObjectName(u"label_4")
+        self.label_4.setStyleSheet(u"color: black;")
 
         self.formLayout.setWidget(3, QFormLayout.LabelRole, self.label_4)
 
         self.descriptionLabel = QLabel(self.widget)
         self.descriptionLabel.setObjectName(u"descriptionLabel")
+        self.descriptionLabel.setStyleSheet(u"color: black;")
 
         self.formLayout.setWidget(3, QFormLayout.FieldRole, self.descriptionLabel)
 
