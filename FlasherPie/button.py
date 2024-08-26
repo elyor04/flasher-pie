@@ -6,7 +6,7 @@ from PySide6.QtWidgets import (
     QStyle,
     QWidget,
 )
-from PySide6.QtCore import Qt, QEvent, QTimer, QSize
+from PySide6.QtCore import Qt, QEvent, QTimer, QSize, Signal
 from PySide6.QtGui import QPaintEvent, QMouseEvent, QTransform, QPointingDevice
 
 
@@ -15,10 +15,22 @@ class CustomButton(QPushButton):
     VerticalTopToBottom = 1
     VerticalBottomToTop = 2
 
+    held = Signal()
+
     def __init__(self, parent: QWidget = None) -> None:
         super().__init__(parent)
+
         self._orientation = CustomButton.Horizontal
+        self._timer = QTimer(self)
+
         self._initialize_stylesheet()
+
+        self._timer.setInterval(1000)
+        self._timer.setSingleShot(True)
+        self._timer.timeout.connect(self._emit_held)
+
+        self.pressed.connect(self._start_timer)
+        self.released.connect(self._stop_timer)
 
     def _initialize_stylesheet(self) -> None:
         self.setStyleSheet(
@@ -120,3 +132,14 @@ class CustomButton(QPushButton):
             QPointingDevice.primaryPointingDevice(),
         )
         QApplication.sendEvent(self, release_event)
+
+    def _start_timer(self) -> None:
+        self._timer.start()
+
+    def _stop_timer(self) -> None:
+        if self._timer.isActive():
+            self._timer.stop()
+
+    def _emit_held(self) -> None:
+        if self.isDown():
+            self.held.emit()

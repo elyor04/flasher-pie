@@ -44,7 +44,7 @@ class FlasherPie(QWidget):
         self.ui.eraseButton.clicked.connect(self.eraseButton_onclick)
         self.ui.exitButton.clicked.connect(self.exitButton_onclick)
 
-        self.ui.powerButton.clicked.connect(self.powerButton_onclick)
+        self.ui.powerButton.held.connect(self.powerButton_onclick)
         self.ui.upButton.clicked.connect(self.upButton_onclick)
         self.ui.downButton.clicked.connect(self.downButton_onclick)
         self.ui.enterButton.clicked.connect(self.enterButton_onclick)
