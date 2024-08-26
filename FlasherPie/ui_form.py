@@ -19,7 +19,7 @@ from PySide6.QtWidgets import (QApplication, QFormLayout, QLabel, QListWidget,
     QListWidgetItem, QPushButton, QSizePolicy, QVBoxLayout,
     QWidget)
 
-from .button import OrientedButton
+from .button import CustomButton
 
 class Ui_Widget(object):
     def setupUi(self, Widget):
@@ -96,22 +96,22 @@ class Ui_Widget(object):
         self.verticalLayout_2 = QVBoxLayout(self.widget1)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.powerButton = OrientedButton(self.widget1)
+        self.powerButton = CustomButton(self.widget1)
         self.powerButton.setObjectName(u"powerButton")
 
         self.verticalLayout_2.addWidget(self.powerButton)
 
-        self.upButton = OrientedButton(self.widget1)
+        self.upButton = CustomButton(self.widget1)
         self.upButton.setObjectName(u"upButton")
 
         self.verticalLayout_2.addWidget(self.upButton)
 
-        self.downButton = OrientedButton(self.widget1)
+        self.downButton = CustomButton(self.widget1)
         self.downButton.setObjectName(u"downButton")
 
         self.verticalLayout_2.addWidget(self.downButton)
 
-        self.enterButton = OrientedButton(self.widget1)
+        self.enterButton = CustomButton(self.widget1)
         self.enterButton.setObjectName(u"enterButton")
 
         self.verticalLayout_2.addWidget(self.enterButton)
@@ -122,22 +122,22 @@ class Ui_Widget(object):
         self.verticalLayout = QVBoxLayout(self.widget2)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.menuButton = OrientedButton(self.widget2)
+        self.menuButton = CustomButton(self.widget2)
         self.menuButton.setObjectName(u"menuButton")
 
         self.verticalLayout.addWidget(self.menuButton)
 
-        self.flashButton = OrientedButton(self.widget2)
+        self.flashButton = CustomButton(self.widget2)
         self.flashButton.setObjectName(u"flashButton")
 
         self.verticalLayout.addWidget(self.flashButton)
 
-        self.eraseButton = OrientedButton(self.widget2)
+        self.eraseButton = CustomButton(self.widget2)
         self.eraseButton.setObjectName(u"eraseButton")
 
         self.verticalLayout.addWidget(self.eraseButton)
 
-        self.exitButton = OrientedButton(self.widget2)
+        self.exitButton = CustomButton(self.widget2)
         self.exitButton.setObjectName(u"exitButton")
 
         self.verticalLayout.addWidget(self.exitButton)

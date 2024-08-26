@@ -33,7 +33,7 @@ class OpenOcd:
                     with zipfile.ZipFile(source, "r") as _file:
                         _file.extractall(os.path.join(self.data_dir, source.stem))
                 except Exception as e:
-                    print(f"Error while extracting {source}: {e}")
+                    print(f"Error while extracting: {e}")
 
     def source_dirs(self) -> list[str]:
         return [
@@ -65,7 +65,7 @@ class OpenOcd:
                                 "description": data.get("description"),
                                 "date": datetime.fromtimestamp(
                                     data.get("date")
-                                ).strftime("%A, %B %d, %Y %I:%M %p"),
+                                ).strftime("%Y-%m-%d %H:%M"),
                             }
                         )
 

@@ -1,7 +1,8 @@
+import os
 from PySide6.QtWidgets import QWidget
 from PySide6.QtGui import QIcon
 from .ui_form import Ui_Widget
-from .button import OrientedButton
+from .button import CustomButton
 from .openOcd import OpenOcd
 from .memoryCard import get_memory_card_paths
 
@@ -18,15 +19,15 @@ class FlasherPie(QWidget):
         self._load_data()
 
     def _init_ui(self) -> None:
-        self.ui.menuButton.setOrientation(OrientedButton.VerticalTopToBottom)
-        self.ui.flashButton.setOrientation(OrientedButton.VerticalTopToBottom)
-        self.ui.eraseButton.setOrientation(OrientedButton.VerticalTopToBottom)
-        self.ui.exitButton.setOrientation(OrientedButton.VerticalTopToBottom)
+        self.ui.menuButton.setOrientation(CustomButton.VerticalTopToBottom)
+        self.ui.flashButton.setOrientation(CustomButton.VerticalTopToBottom)
+        self.ui.eraseButton.setOrientation(CustomButton.VerticalTopToBottom)
+        self.ui.exitButton.setOrientation(CustomButton.VerticalTopToBottom)
 
-        self.ui.powerButton.setOrientation(OrientedButton.VerticalBottomToTop)
-        self.ui.upButton.setOrientation(OrientedButton.VerticalBottomToTop)
-        self.ui.downButton.setOrientation(OrientedButton.VerticalTopToBottom)
-        self.ui.enterButton.setOrientation(OrientedButton.VerticalBottomToTop)
+        self.ui.powerButton.setOrientation(CustomButton.VerticalBottomToTop)
+        self.ui.upButton.setOrientation(CustomButton.VerticalBottomToTop)
+        self.ui.downButton.setOrientation(CustomButton.VerticalTopToBottom)
+        self.ui.enterButton.setOrientation(CustomButton.VerticalBottomToTop)
 
         self.ui.menuButton.setText("Menyu")
         self.ui.flashButton.setText("Yozish")
@@ -48,18 +49,46 @@ class FlasherPie(QWidget):
         self.ui.downButton.clicked.connect(self.downButton_onclick)
         self.ui.enterButton.clicked.connect(self.enterButton_onclick)
 
-    def _load_data(self) -> None:
+    def _load_data(self, row: int = 0) -> None:
+        self.ui.flashListWidget.clear()
+
         for memory_card_path in get_memory_card_paths():
             self.openocd.load_data(memory_card_path)
+
+        self.source_dirs = self.openocd.source_dirs()
+        if not self.source_dirs:
+            return
+
+        self.ui.flashListWidget.addItems(
+            [os.path.basename(source_dir) for source_dir in self.source_dirs]
+        )
+        self.ui.flashListWidget.setCurrentRow(row)
+
+        config = self.openocd.get_config(self.source_dirs[row])
+
+        self.ui.titleLabel.setText(config.get("title", ""))
+        self.ui.versionLabel.setText(config.get("version", ""))
+        self.ui.dateLabel.setText(config.get("date", ""))
+        self.ui.descriptionLabel.setText(config.get("description", ""))
 
     def menuButton_onclick(self) -> None:
         pass
 
     def flashButton_onclick(self) -> None:
-        pass
+        self.ui.logListWidget.clear()
+
+        if not self.source_dirs:
+            return
+        row = self.ui.flashListWidget.currentRow()
+        self.openocd.flash(self.source_dirs[row], self.ui.logListWidget.addItem)
 
     def eraseButton_onclick(self) -> None:
-        pass
+        self.ui.logListWidget.clear()
+
+        if not self.source_dirs:
+            return
+        row = self.ui.flashListWidget.currentRow()
+        self.openocd.erase(self.source_dirs[row], self.ui.logListWidget.addItem)
 
     def exitButton_onclick(self) -> None:
         pass
@@ -68,10 +97,18 @@ class FlasherPie(QWidget):
         pass
 
     def upButton_onclick(self) -> None:
-        pass
+        count = self.ui.flashListWidget.count()
+        if count == 0:
+            return
+        row = self.ui.flashListWidget.currentRow()
+        self._load_data((row - 1) % count)
 
     def downButton_onclick(self) -> None:
-        pass
+        count = self.ui.flashListWidget.count()
+        if count == 0:
+            return
+        row = self.ui.flashListWidget.currentRow()
+        self._load_data((row + 1) % count)
 
     def enterButton_onclick(self) -> None:
         pass

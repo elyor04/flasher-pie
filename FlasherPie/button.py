@@ -10,14 +10,14 @@ from PySide6.QtCore import Qt, QEvent, QTimer, QSize
 from PySide6.QtGui import QPaintEvent, QMouseEvent, QTransform, QPointingDevice
 
 
-class OrientedButton(QPushButton):
+class CustomButton(QPushButton):
     Horizontal = 0
     VerticalTopToBottom = 1
     VerticalBottomToTop = 2
 
     def __init__(self, parent: QWidget = None) -> None:
         super().__init__(parent)
-        self._orientation = OrientedButton.Horizontal
+        self._orientation = CustomButton.Horizontal
         self._initialize_stylesheet()
 
     def _initialize_stylesheet(self) -> None:
@@ -48,13 +48,13 @@ class OrientedButton(QPushButton):
 
     def sizeHint(self) -> QSize:
         size = super().sizeHint()
-        if self._orientation != OrientedButton.Horizontal:
+        if self._orientation != CustomButton.Horizontal:
             return QSize(size.height(), size.width())
         return size
 
     def minimumSizeHint(self) -> QSize:
         min_size = super().minimumSizeHint()
-        if self._orientation != OrientedButton.Horizontal:
+        if self._orientation != CustomButton.Horizontal:
             return QSize(min_size.height(), min_size.width())
         return min_size
 
@@ -63,9 +63,9 @@ class OrientedButton(QPushButton):
 
     def setOrientation(self, orientation: int) -> None:
         if orientation not in (
-            OrientedButton.Horizontal,
-            OrientedButton.VerticalTopToBottom,
-            OrientedButton.VerticalBottomToTop,
+            CustomButton.Horizontal,
+            CustomButton.VerticalTopToBottom,
+            CustomButton.VerticalBottomToTop,
         ):
             raise ValueError("Invalid orientation value")
         if self._orientation != orientation:
@@ -79,13 +79,13 @@ class OrientedButton(QPushButton):
         option = QStyleOptionButton()
         self.initStyleOption(option)
 
-        if self._orientation == OrientedButton.Horizontal:
+        if self._orientation == CustomButton.Horizontal:
             painter.drawControl(QStyle.CE_PushButton, option)
             return
-        elif self._orientation == OrientedButton.VerticalTopToBottom:
+        elif self._orientation == CustomButton.VerticalTopToBottom:
             transform.rotate(90)
             transform.translate(0, -self.width())
-        elif self._orientation == OrientedButton.VerticalBottomToTop:
+        elif self._orientation == CustomButton.VerticalBottomToTop:
             transform.rotate(-90)
             transform.translate(-self.height(), 0)
 
