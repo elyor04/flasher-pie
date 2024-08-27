@@ -98,11 +98,11 @@ class FlasherPie(QWidget):
         if times == 1:
             self.ui.logListWidget.clear()
 
-        if times >= 5:
+        if times >= 6:
             executor = CommandExecutor("shutdown -h now", self.ui.logListWidget.addItem)
             executor.run()
         else:
-            seconds = 5 - times
+            seconds = 6 - times
             self.ui.logListWidget.addItem(f"Shutting down in {seconds} seconds...")
 
     def upButton_onclick(self) -> None:
