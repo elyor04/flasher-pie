@@ -15,7 +15,7 @@ class CustomButton(QPushButton):
     VerticalTopToBottom = 1
     VerticalBottomToTop = 2
 
-    held = Signal()
+    held = Signal(int)
 
     def __init__(self, parent: QWidget = None) -> None:
         super().__init__(parent)
