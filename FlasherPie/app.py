@@ -1,7 +1,7 @@
 import os
 from PySide6.QtWidgets import QWidget
 from PySide6.QtGui import QIcon
-from .ui_form import Ui_Widget
+from .ui_app import Ui_FlasherPie
 from .button import CustomButton
 from .openOcd import OpenOcd
 from .cmdExecutor import CommandExecutor
@@ -12,7 +12,7 @@ class FlasherPie(QWidget):
     def __init__(self, parent: QWidget = None) -> None:
         super().__init__(parent)
 
-        self.ui = Ui_Widget()
+        self.ui = Ui_FlasherPie()
         self.openocd = OpenOcd()
 
         self.ui.setupUi(self)

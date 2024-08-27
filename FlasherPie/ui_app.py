@@ -2,7 +2,8 @@ from PySide6.QtCore import QCoreApplication, QRect, QMetaObject
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QListWidget, QLabel, QFormLayout
 from .button import CustomButton
 
-class Ui_Widget(object):
+
+class Ui_FlasherPie:
     def setupUi(self, Widget):
         Widget.setObjectName("Widget")
         Widget.resize(480, 800)
@@ -22,7 +23,9 @@ class Ui_Widget(object):
         self.layout.setContentsMargins(0, 0, 0, 0)
 
         self.flashListWidget = QListWidget(self.widget)
-        self.flashListWidget.setStyleSheet("background-color: rgb(200, 200, 200); color: black;")
+        self.flashListWidget.setStyleSheet(
+            "background-color: rgb(200, 200, 200); color: black;"
+        )
         self.layout.addWidget(self.flashListWidget)
 
         self.formLayout = QFormLayout()
@@ -30,7 +33,9 @@ class Ui_Widget(object):
         self.layout.addLayout(self.formLayout)
 
         self.logListWidget = QListWidget(self.widget)
-        self.logListWidget.setStyleSheet("background-color: rgb(50, 50, 50); color: white;")
+        self.logListWidget.setStyleSheet(
+            "background-color: rgb(50, 50, 50); color: white;"
+        )
         self.layout.addWidget(self.logListWidget)
 
     def setupForm(self, parent):
@@ -111,7 +116,7 @@ class Ui_Widget(object):
         self.layoutLeft.addWidget(self.exitButton)
 
     def retranslateUi(self, Widget):
-        Widget.setWindowTitle(QCoreApplication.translate("Widget", "Widget"))
+        Widget.setWindowTitle(QCoreApplication.translate("Widget", "Flasher Pie"))
         self.label.setText(QCoreApplication.translate("Widget", "Qurilma:"))
         self.label_2.setText(QCoreApplication.translate("Widget", "Versiya:"))
         self.label_3.setText(QCoreApplication.translate("Widget", "Sana:"))
