@@ -1,5 +1,5 @@
 import os
-from PySide6.QtWidgets import QWidget
+from PySide6.QtWidgets import QWidget, QListWidgetItem
 from PySide6.QtGui import QIcon
 from .ui_app import Ui_FlasherPie
 from .button import CustomButton
@@ -125,6 +125,6 @@ class FlasherPie(QWidget):
         pass
 
     def logListWidget_update(self, output: str) -> None:
-        self.ui.logListWidget.addItem(output)
-        count = self.ui.flashListWidget.count()
-        self.ui.logListWidget.setCurrentRow(count - 1)
+        item = QListWidgetItem(output)
+        self.ui.logListWidget.addItem(item)
+        self.ui.logListWidget.setCurrentItem(item)
