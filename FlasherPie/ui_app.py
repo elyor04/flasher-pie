@@ -28,7 +28,7 @@ class Ui_FlasherPie:
 
     def setupMainWidget(self, parent):
         self.widget = QWidget(parent)
-        self.widget.setGeometry(QRect(40, 20, 401, 771))
+        self.widget.setGeometry(QRect(40, 30, 401, 761))
         self.layout = QVBoxLayout(self.widget)
         self.layout.setContentsMargins(0, 0, 0, 0)
 
