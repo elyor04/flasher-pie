@@ -136,7 +136,7 @@ class Ui_FlasherPie:
         self.horizontalLayout.addWidget(self.label_5)
 
         self.timeLabel = QLabel(self.widgetTop)
-        self.timeLabel.setObjectName("timeLabel")
+        self.timeLabel.setStyleSheet("color: blue;")
         self.horizontalLayout.addWidget(self.timeLabel)
 
         self.horizontalSpacer = QSpacerItem(
@@ -149,7 +149,7 @@ class Ui_FlasherPie:
         self.horizontalLayout.addWidget(self.label_8)
 
         self.powerLabel = QLabel(self.widgetTop)
-        self.powerLabel.setObjectName("powerLabel")
+        self.powerLabel.setStyleSheet("color: blue;")
         self.horizontalLayout.addWidget(self.powerLabel)
 
     def retranslateUi(self, Widget):
