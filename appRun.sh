@@ -1,11 +1,12 @@
 #!/bin/sh
 
 BASE_DIR=$(dirname "$(readlink -f "$0")")
-
 cd "$BASE_DIR"
-git pull
 
+git pull
 python3 -m venv .venv
+
+sleep 1
 source .venv/bin/activate
 
 pip3 install -r requirements.txt
