@@ -25,7 +25,7 @@ class CustomButton(QPushButton):
 
         self._initialize_stylesheet()
 
-        self._timer.setInterval(1000)
+        self._timer.setInterval(2000)
         self._timer.setSingleShot(True)
         self._timer.timeout.connect(self._emit_held)
 

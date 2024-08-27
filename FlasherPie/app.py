@@ -4,6 +4,7 @@ from PySide6.QtGui import QIcon
 from .ui_form import Ui_Widget
 from .button import CustomButton
 from .openOcd import OpenOcd
+from .cmdExecutor import CommandExecutor
 from .memoryCard import get_memory_card_paths
 
 
@@ -94,7 +95,10 @@ class FlasherPie(QWidget):
         pass
 
     def powerButton_onclick(self) -> None:
-        pass
+        executor = CommandExecutor(
+            "sudo shutdown -h now", self.ui.logListWidget.addItem
+        )
+        executor.run()
 
     def upButton_onclick(self) -> None:
         count = self.ui.flashListWidget.count()
