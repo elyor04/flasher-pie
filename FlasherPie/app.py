@@ -103,7 +103,9 @@ class FlasherPie(QWidget):
             executor.run()
         else:
             seconds = 6 - times
-            self.ui.logListWidget.addItem(f"Shutting down in {seconds} seconds...")
+            self.ui.logListWidget.addItem(
+                f"Tizim o'chirilishiga {seconds} soniya qoldi..."
+            )
 
     def upButton_onclick(self) -> None:
         count = self.ui.flashListWidget.count()
