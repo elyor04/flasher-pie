@@ -96,7 +96,9 @@ class FlasherPie(QWidget):
 
     def powerButton_onclick(self) -> None:
         self.ui.logListWidget.clear()
-        executor = CommandExecutor("shutdown -h now", self.ui.logListWidget.addItem)
+
+        shutdown_cmd = 'for i in {5..1}; do echo "Shutting down in $i seconds..."; sleep 1; done; shutdown -h now'
+        executor = CommandExecutor(shutdown_cmd, self.ui.logListWidget.addItem)
         executor.run()
 
     def upButton_onclick(self) -> None:
