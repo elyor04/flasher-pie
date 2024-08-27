@@ -2,5 +2,8 @@
 
 BASE_DIR=$(dirname "$(readlink -f "$0")")
 
-pip3 install -r "$BASE_DIR/requirements.txt"
-python3 "$BASE_DIR/main.py"
+cd "$BASE_DIR"
+git pull
+
+pip3 install -r requirements.txt
+python3 main.py
