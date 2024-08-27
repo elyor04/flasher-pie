@@ -11,8 +11,8 @@ git pull
 echo "RUNNING: python3 -m venv .venv"
 python3 -m venv .venv
 
-echo "RUNNING: source .venv/bin/activate"
-source .venv/bin/activate
+echo "RUNNING: source "$BASE_DIR/.venv/bin/activate""
+source "$BASE_DIR/.venv/bin/activate"
 
 echo "RUNNING: pip3 install -r requirements.txt"
 pip3 install -r requirements.txt
