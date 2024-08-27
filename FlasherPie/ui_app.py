@@ -1,5 +1,14 @@
 from PySide6.QtCore import QCoreApplication, QRect, QMetaObject
-from PySide6.QtWidgets import QWidget, QVBoxLayout, QListWidget, QLabel, QFormLayout
+from PySide6.QtWidgets import (
+    QWidget,
+    QVBoxLayout,
+    QListWidget,
+    QLabel,
+    QFormLayout,
+    QHBoxLayout,
+    QSpacerItem,
+    QSizePolicy,
+)
 from .button import CustomButton
 
 
@@ -12,13 +21,14 @@ class Ui_FlasherPie:
         self.setupMainWidget(Widget)
         self.setupRightSideButtons(Widget)
         self.setupLeftSideButtons(Widget)
+        self.setupTopBar(Widget)
         self.retranslateUi(Widget)
 
         QMetaObject.connectSlotsByName(Widget)
 
     def setupMainWidget(self, parent):
         self.widget = QWidget(parent)
-        self.widget.setGeometry(QRect(40, 10, 401, 781))
+        self.widget.setGeometry(QRect(40, 20, 401, 771))
         self.layout = QVBoxLayout(self.widget)
         self.layout.setContentsMargins(0, 0, 0, 0)
 
@@ -115,9 +125,40 @@ class Ui_FlasherPie:
         self.exitButton.setObjectName("exitButton")
         self.layoutLeft.addWidget(self.exitButton)
 
+    def setupTopBar(self, parent):
+        self.widgetTop = QWidget(parent)
+        self.widgetTop.setGeometry(QRect(40, 0, 401, 22))
+        self.horizontalLayout = QHBoxLayout(self.widgetTop)
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+
+        self.label_5 = QLabel(self.widgetTop)
+        self.label_5.setStyleSheet("color: black;")
+        self.horizontalLayout.addWidget(self.label_5)
+
+        self.timeLabel = QLabel(self.widgetTop)
+        self.timeLabel.setObjectName("timeLabel")
+        self.horizontalLayout.addWidget(self.timeLabel)
+
+        self.horizontalSpacer = QSpacerItem(
+            40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum
+        )
+        self.horizontalLayout.addItem(self.horizontalSpacer)
+
+        self.label_8 = QLabel(self.widgetTop)
+        self.label_8.setStyleSheet("color: black;")
+        self.horizontalLayout.addWidget(self.label_8)
+
+        self.powerLabel = QLabel(self.widgetTop)
+        self.powerLabel.setObjectName("powerLabel")
+        self.horizontalLayout.addWidget(self.powerLabel)
+
     def retranslateUi(self, Widget):
         Widget.setWindowTitle(QCoreApplication.translate("Widget", "Flasher Pie"))
         self.label.setText(QCoreApplication.translate("Widget", "Qurilma:"))
         self.label_2.setText(QCoreApplication.translate("Widget", "Versiya:"))
         self.label_3.setText(QCoreApplication.translate("Widget", "Sana:"))
         self.label_4.setText(QCoreApplication.translate("Widget", "Tavsif:"))
+        self.label_5.setText(QCoreApplication.translate("Widget", "Vaqt:"))
+        self.timeLabel.setText(QCoreApplication.translate("Widget", "16:00"))
+        self.label_8.setText(QCoreApplication.translate("Widget", "Quvvat:"))
+        self.powerLabel.setText(QCoreApplication.translate("Widget", "50%"))
