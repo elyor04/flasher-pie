@@ -81,7 +81,7 @@ class FlasherPie(QWidget):
         if not self.source_dirs:
             return
         row = self.ui.flashListWidget.currentRow()
-        self.openocd.flash(self.source_dirs[row], self.ui.logListWidget.addItem)
+        self.openocd.flash(self.source_dirs[row], self.logListWidget_update)
 
     def eraseButton_onclick(self) -> None:
         self.ui.logListWidget.clear()
@@ -89,7 +89,7 @@ class FlasherPie(QWidget):
         if not self.source_dirs:
             return
         row = self.ui.flashListWidget.currentRow()
-        self.openocd.erase(self.source_dirs[row], self.ui.logListWidget.addItem)
+        self.openocd.erase(self.source_dirs[row], self.logListWidget_update)
 
     def exitButton_onclick(self) -> None:
         pass
@@ -99,27 +99,32 @@ class FlasherPie(QWidget):
             self.ui.logListWidget.clear()
 
         if times >= 6:
-            executor = CommandExecutor("shutdown -h now", self.ui.logListWidget.addItem)
+            executor = CommandExecutor("shutdown -h now", self.logListWidget_update)
             executor.run()
         else:
             seconds = 6 - times
-            self.ui.logListWidget.addItem(
-                f"Tizim o'chirilishiga {seconds} soniya qoldi..."
-            )
+            self.logListWidget_update(f"Tizim o'chirilishiga {seconds} soniya qoldi...")
 
     def upButton_onclick(self) -> None:
         count = self.ui.flashListWidget.count()
         if count == 0:
-            return
+            return self._load_data()
+
         row = self.ui.flashListWidget.currentRow()
         self._load_data((row - 1) % count)
 
     def downButton_onclick(self) -> None:
         count = self.ui.flashListWidget.count()
         if count == 0:
-            return
+            return self._load_data()
+
         row = self.ui.flashListWidget.currentRow()
         self._load_data((row + 1) % count)
 
     def enterButton_onclick(self) -> None:
         pass
+
+    def logListWidget_update(self, output: str) -> None:
+        self.ui.logListWidget.addItem(output)
+        count = self.ui.flashListWidget.count()
+        self.ui.logListWidget.setCurrentRow(count - 1)
