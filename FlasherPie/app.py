@@ -95,6 +95,7 @@ class FlasherPie(QWidget):
         pass
 
     def powerButton_onclick(self) -> None:
+        self.ui.logListWidget.clear()
         executor = CommandExecutor("shutdown -h now", self.ui.logListWidget.addItem)
         executor.run()
 
