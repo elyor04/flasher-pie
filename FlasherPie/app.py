@@ -94,12 +94,13 @@ class FlasherPie(QWidget):
     def exitButton_onclick(self) -> None:
         pass
 
-    def powerButton_onclick(self) -> None:
-        self.ui.logListWidget.clear()
+    def powerButton_onclick(self, times: int) -> None:
+        if times >= 5:
+            executor = CommandExecutor("shutdown -h now", self.ui.logListWidget.addItem)
+            return executor.run()
 
-        shutdown_cmd = 'for i in {5..1}; do echo "Shutting down in $i seconds..."; sleep 1; done; shutdown -h now'
-        executor = CommandExecutor(shutdown_cmd, self.ui.logListWidget.addItem)
-        executor.run()
+        seconds = 5 - times
+        self.ui.logListWidget.addItem(f"Shutting down in {seconds} seconds...")
 
     def upButton_onclick(self) -> None:
         count = self.ui.flashListWidget.count()

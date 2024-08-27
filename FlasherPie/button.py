@@ -19,14 +19,12 @@ class CustomButton(QPushButton):
 
     def __init__(self, parent: QWidget = None) -> None:
         super().__init__(parent)
+        self._initialize_stylesheet()
 
         self._orientation = CustomButton.Horizontal
         self._timer = QTimer(self)
 
-        self._initialize_stylesheet()
-
-        self._timer.setInterval(2000)
-        self._timer.setSingleShot(True)
+        self._timer.setInterval(1000)
         self._timer.timeout.connect(self._emit_held)
 
         self.pressed.connect(self._start_timer)
@@ -134,6 +132,7 @@ class CustomButton(QPushButton):
         QApplication.sendEvent(self, release_event)
 
     def _start_timer(self) -> None:
+        self._times = 0
         self._timer.start()
 
     def _stop_timer(self) -> None:
@@ -142,4 +141,5 @@ class CustomButton(QPushButton):
 
     def _emit_held(self) -> None:
         if self.isDown():
-            self.held.emit()
+            self._times += 1
+            self.held.emit(self._times)
