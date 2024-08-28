@@ -6,8 +6,21 @@ from PySide6.QtWidgets import (
     QStyle,
     QWidget,
 )
+from PySide6.QtGui import (
+    QPaintEvent,
+    QMouseEvent,
+    QTransform,
+    QPointingDevice,
+    QCloseEvent,
+)
 from PySide6.QtCore import Qt, QEvent, QTimer, QSize, Signal
-from PySide6.QtGui import QPaintEvent, QMouseEvent, QTransform, QPointingDevice
+
+try:
+    import RPi.GPIO as GPIO
+
+    GPIO_ENABLED = True
+except:
+    GPIO_ENABLED = False
 
 
 class CustomButton(QPushButton):
@@ -29,6 +42,10 @@ class CustomButton(QPushButton):
 
         self.pressed.connect(self._start_timer)
         self.released.connect(self._stop_timer)
+
+        if GPIO_ENABLED:
+            self._button_pin = None
+            GPIO.setmode(GPIO.BCM)  # or GPIO.BOARD
 
     def _initialize_stylesheet(self) -> None:
         self.setStyleSheet(
@@ -103,6 +120,20 @@ class CustomButton(QPushButton):
         option.rect = option.rect.transposed()
         painter.drawControl(QStyle.CE_PushButton, option)
 
+    def setupGPIObutton(self, button_pin: int) -> None:
+        if not GPIO_ENABLED:
+            return
+
+        self._button_pin = button_pin
+        GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+        GPIO.add_event_detect(
+            button_pin,
+            GPIO.FALLING,
+            callback=self.simulate_button_click,
+            bouncetime=300,
+        )
+
     def simulate_button_click(self) -> None:
         center_point = self.rect().center()
         press_event = QMouseEvent(
@@ -130,6 +161,10 @@ class CustomButton(QPushButton):
             QPointingDevice.primaryPointingDevice(),
         )
         QApplication.sendEvent(self, release_event)
+
+    def closeEvent(self, event: QCloseEvent) -> None:
+        if GPIO_ENABLED and (self._button_pin is not None):
+            GPIO.cleanup(self._button_pin)
 
     def _start_timer(self) -> None:
         self._times = 0
