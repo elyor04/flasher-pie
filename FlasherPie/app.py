@@ -50,6 +50,16 @@ class FlasherPie(QWidget):
         self.ui.downButton.clicked.connect(self.downButton_onclick)
         self.ui.enterButton.clicked.connect(self.enterButton_onclick)
 
+        self.ui.menuButton.setupGPIObutton(1)
+        self.ui.flashButton.setupGPIObutton(2)
+        self.ui.eraseButton.setupGPIObutton(3)
+        self.ui.exitButton.setupGPIObutton(4)
+
+        self.ui.powerButton.setupGPIObutton(5)
+        self.ui.upButton.setupGPIObutton(6)
+        self.ui.downButton.setupGPIObutton(7)
+        self.ui.enterButton.setupGPIObutton(8)
+
     def _load_data(self, row: int = 0) -> None:
         self.ui.flashListWidget.clear()
 
